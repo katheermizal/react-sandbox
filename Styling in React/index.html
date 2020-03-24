@@ -1,0 +1,91 @@
+<!Doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>!React !React !React</title>
+        <!--Contain all Reacct Core Libraries-->
+        <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <!--Use for React DOM-->
+        <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <!--Use to convert JSX in to JS-->
+        <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+        <style>
+            #container {
+                padding: 50px;
+                background-color: #EEE;
+            }
+
+            .letter {
+                padding: 10px;
+                margin: 10px;
+                background-color: #ffde00;
+                color: #333;
+                display: inline-block;
+                font-family: monospace;
+                font-size: 32px;
+                text-align: center; 
+            }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <div id="container-new"></div>
+        <!--Define babel to translate JSX in to JS-->
+        <script type="text/babel">
+            var destination = document.querySelector('#container'),
+                destinationNew = document.querySelector('#container-new');
+
+            class Letter extends React.Component {
+                render(){
+                    var letterStyle = {
+                        backgroundColor: this.props.bgcolor,
+                    }
+                    return (
+                        <div className="letter" style={letterStyle}>
+                            {this.props.children}
+                        </div>
+                    );
+                }
+            }
+
+            class Buttonify extends React.Component {
+                render(){
+                    var buttonStyle = {
+                        padding: 10,
+                        margin: 10,
+                        backgroundColor: "#ccc",
+                        color: "#333",
+                        display: "inline-block",
+                        fontFamily: "monospace",
+                        fontSize: "32px",
+                        textAlign: "center"
+                    };
+                    return (
+                        <button type={this.props.behaviour} style={buttonStyle}>
+                            {this.props.children} 
+                        </button>
+                    );
+                }
+            }
+
+            ReactDOM.render(
+                <div>
+                    <Letter bgcolor="#58B3FF">A</Letter>
+                    <Letter bgcolor="#FF605F">E</Letter>
+                    <Letter bgcolor="#FFD52E">I</Letter>
+                    <Letter bgcolor="#49DD8E">O</Letter>
+                    <Letter bgcolor="#AE99FF">U</Letter>
+                </div>,
+                destination
+            )
+            ReactDOM.render(
+                <div>
+                    <Buttonify behaviour="submit">SEND DATA</Buttonify>
+                    <Buttonify behaviour="Reset">RESET</Buttonify>
+                    <Buttonify behaviour="search">SEARCH</Buttonify>
+                </div>,
+                destinationNew
+            )
+        </script>
+    </body>
+</html>

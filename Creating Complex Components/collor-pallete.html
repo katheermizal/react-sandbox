@@ -1,0 +1,142 @@
+<!Doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>!React !React !React</title>
+        <!--Contain all Reacct Core Libraries-->
+        <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <!--Use for React DOM-->
+        <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <!--Use to convert JSX in to JS-->
+        <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+        <style>
+            * {
+                box-sizing: border-box;
+                -webkit-box-sizing: border-box;
+            }
+
+            #container {
+                width: 100%;
+                max-width: 800px;
+                padding: 0 15px;
+                margin: 50px auto;
+                background-color: #fff;
+            }
+
+            .row {
+                display: flex;
+                flex-wrap: wrap;
+                margin-left: -15px;
+                margin-right: -15px;
+            }
+
+            .card {
+                flex: 0 0 20%;
+                max-width: 20%;
+                padding: 0 15px;
+                margin-bottom: 20px;
+            }
+
+            .card__container {
+                height: 200px;
+                padding: 0;
+                background-color: #fff;
+            }
+
+            .card__pallet {
+                height: 150px;
+                padding: 0;
+            }
+
+            .card__label,
+            .card__name {
+                margin: 0;
+                font-family: sans-serif;
+                font-weight: bold;
+            }
+
+            .card__label {
+                padding: 13px 13px 0;
+                font-size: 16px;
+            }
+
+            .card__name {
+                padding: 0 13px 13px;
+                text-transform: uppercase;
+                font-size: 8px;
+                letter-spacing: 0.6px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <!--Define babel to translate JSX in to JS-->
+        <script type="text/babel">
+            var destination = document.querySelector('#container');
+
+            class Square extends React.Component {
+                render(){
+                    var squareStyle = {
+                        backgroundColor: this.props.color,
+                    };
+                    return (
+                        <div style={squareStyle}  className="card__pallet"></div>
+                    );
+                }
+            }
+
+            class Label extends React.Component {
+                render() {
+                    return (
+                        <p className="card__label">{this.props.color}</p>
+                    );
+                }
+            }
+
+            class LabelName extends React.Component {
+                render() {
+                    var nameStyle = {
+                        color: this.props.color,
+                    };
+                    return (
+                        <p style={nameStyle} className="card__name">{this.props.colorName}</p>
+                    );
+                }
+            }
+
+            class Card extends React.Component {
+                render(){
+                    var cardStyle = {
+                        WebkitFilter: "drop-shadow(0px 0px 3px #666)",
+                        filter: "drop-shadow(0px 0px 3px #666)"
+                    };
+                    return (
+                        <div className="card">
+                            <div style={cardStyle} className="card__container">
+                                <Square color={this.props.colorCode}/>
+                                <Label color={this.props.colorCode}/> 
+                                <LabelName color={this.props.colorCode} colorName={this.props.colorName}/>
+                            </div>
+                        </div>
+                    );
+                }
+            }
+
+            ReactDOM.render(
+                <div className="row">
+                   <Card colorCode="#FF6663" colorName="PINK"/>
+                   <Card colorCode="#333333" colorName="GRAY"/>
+                   <Card colorCode="#000000" colorName="BLACK"/>
+                   <Card colorCode="#38BB14" colorName="GREEN"/>
+                   <Card colorCode="#C90B0B" colorName="RED"/>
+                   <Card colorCode="#FF8000" colorName="ORANGE"/>
+                   <Card colorCode="#FFF500" colorName="YELLOW"/>
+                   <Card colorCode="#CCCCCC" colorName="LIGHT GRAY"/>
+                   <Card colorCode="#7E41A2" colorName="PURPLE"/>
+                   <Card colorCode="#C14911" colorName="BROWN"/>
+                </div>,
+                destination
+            )
+        </script>
+    </body>
+</html>
